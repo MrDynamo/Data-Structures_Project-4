@@ -15,13 +15,16 @@ public interface ADTFrequencyTable {
     // Throws:
 
     void insert() throws FTableException;
-    // Inserts a newItem to the table. If newItem is already in the table, increment its count. Otherwise newItem is inserted to the table with the count 1. Set the number of comparisons required for this task accordingly.T hrows FTableException if frequency tableisfull.
+    // Inserts a newItem to the table. If newItem is already in the table, increment its count.
+    // Otherwise newItem is inserted to the table with the count 1.
+    // Set the number of comparisons required for this task accordingly. Throws FTableException if frequency table is full.
     // Precondition:
     // Postcondition:
-    // Throws:
+    // Throws: FTableException
 
     int retrieve();
-    // Retrieves the count of an item with a given searchKey. Return 0if not found. Set the number of comparisons required for this task accordingly.
+    // Retrieves the count of an item with a given searchKey. Return 0 if not found.
+    // Set the number of comparisons required for this task accordingly.
     // Precondition:
     // Postcondition:
     // Throws:
@@ -33,7 +36,9 @@ public interface ADTFrequencyTable {
     // Throws:
 
     int getNumOfComps();
-    // Returns the number of key comparisons required to perform a particular frequency table operation. (In reality this operation might not be an operation of ADT frequency table. It is included to obtain the statistics of comparisons.
+    // Returns the number of key comparisons required to perform a particular frequency table operation.
+    // (In reality this operation might not be an operation of ADT frequency table.
+    // It is included to obtain the statistics of comparisons.
     // Precondition:
     // Postcondition:
     // Throws:
