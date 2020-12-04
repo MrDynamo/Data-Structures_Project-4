@@ -15,12 +15,13 @@ public interface ADTFrequencyTable {
     // Throws:
 
     void insert() throws FTableException;
+    // void insert(KeyedItem newItem) throws FTableException;
     // Inserts a newItem to the table. If newItem is already in the table, increment its count.
     // Otherwise newItem is inserted to the table with the count 1.
-    // Set the number of comparisons required for this task accordingly. Throws FTableException if frequency table is full.
+    // Set the number of comparisons required for this task accordingly.
     // Precondition:
     // Postcondition:
-    // Throws: FTableException
+    // Throws: FTableException if frequency table is full.
 
     int retrieve();
     // Retrieves the count of an item with a given searchKey. Return 0 if not found.
@@ -43,4 +44,4 @@ public interface ADTFrequencyTable {
     // Postcondition:
     // Throws:
 
-}
+} // End ADTFrequencyTable
