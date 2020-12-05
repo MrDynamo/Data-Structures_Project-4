@@ -1,8 +1,8 @@
 package com.github.mrdynamo.Project_4;
 
-public class FTableBST extends BinaryTreeBasis<String> implements ADTFrequencyTable {
+public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFrequencyTable {
 
-    private TreeNode<String> test;
+    private TreeNode<String, Integer> test;
 
     // Constructor
     public FTableBST() {
@@ -46,7 +46,7 @@ public class FTableBST extends BinaryTreeBasis<String> implements ADTFrequencyTa
     }
 
     @Override
-    public void setRootItem(String newItem) {
+    public void setRootItem(String key) {
 
     }
 

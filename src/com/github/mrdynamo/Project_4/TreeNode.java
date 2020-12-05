@@ -1,22 +1,25 @@
 package com.github.mrdynamo.Project_4;
 
-public class TreeNode<T> {
-    T item; // Question
-    TreeNode<T> leftChild; // Yes answer
-    TreeNode<T> rightChild; // No answer
+public class TreeNode<K, V> {
+    K key; // Key
+    V value; // Value
+    TreeNode<K, V> leftChild; // Yes answer
+    TreeNode<K, V> rightChild; // No answer
 
-    public TreeNode(T newItem) {
+    public TreeNode(K key, V value) {
         // Initializes tree node with item and no children.
-        item = newItem;
+        this.key = key;
+        this.value = value;
         leftChild  = null;
         rightChild = null;
     }  // End constructor
 
-    public TreeNode(T newItem,
-                    TreeNode<T> left, TreeNode<T> right) {
+    public TreeNode(K key, V value,
+                    TreeNode<K, V> left, TreeNode<K, V> right) {
         // Initializes tree node with item and
         // the left and right children references.
-        item = newItem;
+        this.key = key;
+        this.value = value;
         leftChild  = left;
         rightChild = right;
     }  // End constructor

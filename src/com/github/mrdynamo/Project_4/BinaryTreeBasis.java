@@ -1,15 +1,15 @@
 package com.github.mrdynamo.Project_4;
 
-public abstract class BinaryTreeBasis<T> {
+public abstract class BinaryTreeBasis<K, V> {
 
-    protected TreeNode<T> root;
+    protected TreeNode<K, V> root;
 
     public BinaryTreeBasis() {
         root = null;
     }
 
-    public BinaryTreeBasis(T rootItem) {
-        root = new TreeNode<T>(rootItem, null, null);
+    public BinaryTreeBasis(K key, V value) {
+        root = new TreeNode<K, V>(key, value, null, null);
     }
 
     public boolean isEmpty() {
@@ -22,17 +22,17 @@ public abstract class BinaryTreeBasis<T> {
         root = null;
     }
 
-    public T getRootItem() throws TreeException {
+    public K getRootItemKey() throws TreeException {
         // Returns the item in the tree's root.
         if (root == null) {
             throw new TreeException("TreeException: Empty tree");
         }
         else {
-            return root.item;
+            return root.key;
         }  // end if
     }
 
-    public abstract void setRootItem(T newItem);
+    public abstract void setRootItem(K key);
     // Throws UnsupportedOperationException if operation
     // is not supported.
 
