@@ -2,9 +2,11 @@ package com.github.mrdynamo.Project_4;
 
 public class FTableArray implements ADTFrequencyTable {
 
+    private String[][] ftArray;
+
     // Constructor
     public FTableArray() {
-
+        ftArray = new String[10000][10000];
     }
 
     // Implement

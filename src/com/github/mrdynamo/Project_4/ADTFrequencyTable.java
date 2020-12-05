@@ -14,8 +14,7 @@ public interface ADTFrequencyTable {
     // Postcondition:
     // Throws:
 
-    void insert() throws FTableException;
-    // void insert(KeyedItem newItem) throws FTableException;
+    void insert(KeyedItem newItem) throws FTableException;
     // Inserts a newItem to the table. If newItem is already in the table, increment its count.
     // Otherwise newItem is inserted to the table with the count 1.
     // Set the number of comparisons required for this task accordingly.
@@ -23,14 +22,14 @@ public interface ADTFrequencyTable {
     // Postcondition:
     // Throws: FTableException if frequency table is full.
 
-    int retrieve();
+    int retrieve(Comparable<String> searchKey);
     // Retrieves the count of an item with a given searchKey. Return 0 if not found.
     // Set the number of comparisons required for this task accordingly.
     // Precondition:
     // Postcondition:
     // Throws:
 
-    void saveFTable();
+    void saveFTable(String filename);
     // Saves the words and their frequencies in the table in the output file filename in the ascending order based on the searchKey.
     // Precondition:
     // Postcondition:
