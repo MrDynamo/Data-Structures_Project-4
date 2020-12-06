@@ -2,11 +2,13 @@ package com.github.mrdynamo.Project_4;
 
 public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFrequencyTable {
 
-    private TreeNode<String, Integer> test;
+    private TreeNode<Word, Integer> root;
+    private int numOfComps;
 
     // Constructor
     public FTableBST() {
-
+        numOfComps = 0;
+        //root = ;
     }
 
     // Implement
@@ -23,8 +25,18 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
 
     // Implement
     @Override
-    public void insert(KeyedItem newItem) throws FTableException {
+    public void insert(Word newItem) throws FTableException {
+        TreeNode<Word, Integer> r = root, prev = null;
+        while (r != null) {
+            prev = r;
+            if (r.key.compareTo(newItem) < 0)
+                r = r.rightChild;
+            else
+                r = r.leftChild;
+        }
 
+        if (root == null)
+            root = new TreeNode<Word, Integer>(newItem, 1);
     }
 
     // Implement
@@ -42,7 +54,7 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
     // Implement
     @Override
     public int getNumOfComps() {
-        return 0;
+        return numOfComps;
     }
 
     @Override

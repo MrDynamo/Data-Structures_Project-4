@@ -3,10 +3,13 @@ package com.github.mrdynamo.Project_4;
 public class FTableArray implements ADTFrequencyTable {
 
     private String[][] ftArray;
+    private final int MAX_SIZE = 10000;
+    private int numOfComps;
 
     // Constructor
     public FTableArray() {
-        ftArray = new String[10000][10000];
+        ftArray = new String[MAX_SIZE][2];
+        numOfComps = 0;
     }
 
     // Implement
@@ -42,7 +45,7 @@ public class FTableArray implements ADTFrequencyTable {
     // Implement
     @Override
     public int getNumOfComps() {
-        return 0;
+        return numOfComps;
     }
 
 } // End FTableArray

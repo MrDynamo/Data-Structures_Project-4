@@ -1,6 +1,6 @@
 package com.github.mrdynamo.Project_4;
 
-public class TreeNode<K, V> {
+public class TreeNode<K extends Comparable<? super K>, V> extends KeyedItem<K> {
     K key; // Key
     V value; // Value
     TreeNode<K, V> leftChild; // Yes answer
@@ -8,6 +8,7 @@ public class TreeNode<K, V> {
 
     public TreeNode(K key, V value) {
         // Initializes tree node with item and no children.
+        super(key);
         this.key = key;
         this.value = value;
         leftChild  = null;
@@ -18,6 +19,7 @@ public class TreeNode<K, V> {
                     TreeNode<K, V> left, TreeNode<K, V> right) {
         // Initializes tree node with item and
         // the left and right children references.
+        super(key);
         this.key = key;
         this.value = value;
         leftChild  = left;

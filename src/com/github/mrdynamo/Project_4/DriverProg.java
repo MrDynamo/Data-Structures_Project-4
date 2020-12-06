@@ -24,6 +24,7 @@ public class DriverProg {
         input = kbd.nextLine();
         // parse
 
+        // Read file
         System.out.println("Reading...\n");
 
         // Operation loop
