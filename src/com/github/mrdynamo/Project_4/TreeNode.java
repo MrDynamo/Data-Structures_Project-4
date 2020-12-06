@@ -9,7 +9,7 @@ public class TreeNode<K extends Comparable<? super K>, V> extends KeyedItem<K> {
     public TreeNode(K key, V value) {
         // Initializes tree node with item and no children.
         super(key);
-        this.key = key;
+        //this.key = key;
         this.value = value;
         leftChild  = null;
         rightChild = null;
@@ -20,7 +20,7 @@ public class TreeNode<K extends Comparable<? super K>, V> extends KeyedItem<K> {
         // Initializes tree node with item and
         // the left and right children references.
         super(key);
-        this.key = key;
+        //this.key = key;
         this.value = value;
         leftChild  = left;
         rightChild = right;

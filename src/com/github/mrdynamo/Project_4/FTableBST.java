@@ -20,16 +20,17 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
     // Implement
     @Override
     public boolean isEmpty() {
-        return false;
+        return root == null;
     }
 
     // Implement
     @Override
-    public void insert(Word newItem) throws FTableException {
+    public void insert(KeyedItem newItem) throws FTableException {
         TreeNode<Word, Integer> r = root, prev = null;
+        Word tmp = new Word(newItem.toString(), 1);
         while (r != null) {
             prev = r;
-            if (r.key.compareTo(newItem) < 0)
+            if (r.key.compareTo(tmp) < 0)
                 r = r.rightChild;
             else
                 r = r.leftChild;
@@ -37,6 +38,10 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
 
         if (root == null)
             root = new TreeNode<Word, Integer>(newItem, 1);
+        else if (prev.key.compareTo(newItem) < 0)
+            prev.rightChild = new TreeNode<Word, Integer>(newItem, 1);
+        else
+            prev.leftChild = new TreeNode<Word, Integer>(newItem, 1);
     }
 
     // Implement
