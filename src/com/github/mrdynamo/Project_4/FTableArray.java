@@ -8,12 +8,13 @@ public class FTableArray implements ADTFrequencyTable {
 
     private List<Word> words;
     private final int MAX_SIZE = 10000;
-    private int numOfComps, totalWordCount, distinctWordCount;
+    private int numComparisons, numInsertions, totalWordCount, distinctWordCount;
 
     // Constructor
     public FTableArray() {
         words = new ArrayList<Word>(MAX_SIZE);
-        numOfComps = 0;
+        numComparisons = 0;
+        numInsertions = 0;
         totalWordCount = 0;
         distinctWordCount = 0;
     }
@@ -40,29 +41,35 @@ public class FTableArray implements ADTFrequencyTable {
         Word tmp = new Word(newItem.toString().toUpperCase(), 1);
 
         int contains = Collections.binarySearch(words, tmp);
+
+        numComparisons++;
+
         if (contains < 0) {
-            System.out.println("DEBUG: New");
+            //System.out.println("DEBUG: New");
             words.add(tmp);
             totalWordCount++;
             distinctWordCount++;
+            numInsertions++;
         } else {
             System.out.println("DEBUG: Contains");
             int tmpCount = words.get(contains).getCount();
             words.set(contains, new Word(tmp.getKey(), tmpCount + 1));
             totalWordCount++;
+            numInsertions++;
         }
 
         Collections.sort(words);
 
     }
 
-    // Retrieves count of input word
+    // Retrieves count of searchKey
     @Override
     public int retrieve(Comparable searchKey) {
 
         Word tmp = new Word(searchKey.toString().toUpperCase(), 1);
 
         int contains = Collections.binarySearch(words, tmp);
+        numComparisons++;
 
         if (contains < 0)
             return 0;
@@ -87,7 +94,7 @@ public class FTableArray implements ADTFrequencyTable {
     // Return number of comparisons
     @Override
     public int getNumOfComps() {
-        return numOfComps;
+        return numComparisons;
     }
 
     // Return words list

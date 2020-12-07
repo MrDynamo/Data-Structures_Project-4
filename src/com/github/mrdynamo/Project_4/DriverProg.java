@@ -47,13 +47,13 @@ public class DriverProg {
         while (fileIn.hasNext()) {
             KeyedItem item = new KeyedItem(fileIn.next());
             arrFT.insert(item);
-            //bstFT.insert(item);
+            bstFT.insert(item);
         }
 
         // Print initial  table stats
         System.out.println("Writing initial table stats to file.");
         arrFT.saveFTable("outputArrayInitial.txt");
-        //bstFT.saveFTable("outputBSTInitial.txt");
+        bstFT.saveFTable("outputBSTInitial.txt");
 
         // Operation loop
         while (!quit) {
@@ -65,8 +65,8 @@ public class DriverProg {
                     // Retrieve
                     System.out.println("Please enter a word to retrieve: ");
                     input = kbd.nextLine();
-                    System.out.println(arrFT.retrieve(input));
-                    //System.out.println(bstFT.retrieve(input));
+                    System.out.println("arrFT: " + arrFT.retrieve(input));
+                    System.out.println("bstFT: " + bstFT.retrieve(input));
                     //System.out.println("Count of " + input + ": " + arrFT.retrieve(input));
                     break;
                 case 2:
@@ -75,8 +75,8 @@ public class DriverProg {
                     input = kbd.nextLine();
                     KeyedItem item = new KeyedItem(input);
                     arrFT.insert(item);
+                    bstFT.insert(item);
                     //System.out.println("Added " + input + " to FreqTable");
-                    //bstFT.insert(input);
                     break;
                 case 3:
                     // Quit
@@ -94,7 +94,7 @@ public class DriverProg {
         // Print modified table stats
         System.out.println("Writing modified table stats to file.");
         arrFT.saveFTable("outputArrayModified.txt");
-        //bstFT.saveFTable("outputBSTModified.txt");
+        bstFT.saveFTable("outputBSTModified.txt");
 
     } // End main
 

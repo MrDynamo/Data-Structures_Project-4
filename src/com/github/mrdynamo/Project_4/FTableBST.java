@@ -6,27 +6,30 @@ import java.io.IOException;
 public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTable {
 
     private TreeNode<Word> root;
-    private int numOfComps;
+    private int numComparisons, numInsertions, totalWordCount, distinctWordCount;
 
     // Constructor
     public FTableBST() {
-        numOfComps = 0;
-        //root = ;
+        root = null;
+        numComparisons = 0;
+        numInsertions = 0;
+        totalWordCount = 0;
+        distinctWordCount = 0;
     }
 
-    // Implement
+    // Implement - Returns size of BST
     @Override
     public int size() {
         return 0;
     }
 
-    // Implement
+    // Checks if BST is empty
     @Override
     public boolean isEmpty() {
         return root == null;
     }
 
-    // Implement
+    // Implement - Inserts word into frequency table
     @Override
     public void insert(KeyedItem newItem) throws FTableException {
         TreeNode<Word> r = root, prev = null, tmpNode = null;
@@ -49,36 +52,62 @@ public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTabl
             prev.leftChild = new TreeNode<Word>(tmp);
     }
 
-    // Implement
+    // Implement - Returns count of searchKey
     @Override
     public int retrieve(Comparable searchKey) {
         return 0;
     }
 
-    // Implement
+    // Saves frequency table to file
     @Override
     public void saveFTable(String fileName) throws IOException {
-        /*
         FileWriter writer = new FileWriter(fileName);
         writer.write("total_number_of_words: " + this.getTotalWordCount() + System.lineSeparator());
         writer.write("total_number_of_distinct_words: " + this.getDistinctWordCount() + System.lineSeparator());
-        for (Word w : this.getWords()) {
-            writer.write(w.getKey().toUpperCase() + " " + w.getCount() + System.lineSeparator());
-        }
-        writer.close();
+        writer.write(System.lineSeparator());
 
-         */
+        writer.write(inOrder());
+
+        writer.close();
     }
 
-    // Implement
+    // Returns number of comparisons made
     @Override
     public int getNumOfComps() {
-        return numOfComps;
+        return numComparisons;
     }
 
+    // Return total word count
+    public int getTotalWordCount() {
+        return this.totalWordCount;
+    }
+
+    // Return distinct word count
+    public int getDistinctWordCount() {
+        return this.distinctWordCount;
+    }
+
+    // Sets root item of BST
     @Override
     public void setRootItem(Word key) {
+        this.root = new TreeNode<Word>(key);
+    }
 
+    // InOrder traversal
+    private String inOrder() {
+        return inOrder(this.root);
+    }
+
+    // InOrder traversal
+    private String inOrder(TreeNode<Word> node) {
+        String tmp = "";
+        if (node != null) {
+            tmp += inOrder(node.leftChild) + System.lineSeparator();
+            tmp += node.key.toString().toUpperCase();
+            tmp += inOrder(node.rightChild);
+        }
+
+        return tmp;
     }
 
 } // End FTableBST
