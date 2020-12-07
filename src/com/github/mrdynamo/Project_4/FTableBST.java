@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTable {
 
+    private final int MAX_SIZE = 10000;
     private TreeNode<Word> root;
     private int numComparisons, numInsertions, totalWordCount, distinctWordCount;
 
@@ -41,22 +42,31 @@ public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTabl
     // Inserts word into frequency table
     @Override
     public void insert(KeyedItem newItem) throws FTableException {
+
+        if (this.size() > MAX_SIZE)
+            throw new FTableException("FTableException: Frequency table full!");
+
         TreeNode<Word> r = root, prev = null, tmpNode = null;
         Word tmp = new Word(newItem.toString().toUpperCase(), 1);
         tmpNode = new TreeNode<Word>(tmp);
 
         while (r != null) {
             prev = r;
-            if (r.getKey().compareTo(tmp) < 0)
+            if (r.getKey().compareTo(tmp) < 0) {
                 r = r.rightChild;
-            else
+            } else {
                 r = r.leftChild;
+            }
+
+            numComparisons++;
+
         }
 
         if (root == null) {
             root = tmpNode;
             totalWordCount++;
             distinctWordCount++;
+            numComparisons++;
         } else if (prev.getKey().compareTo(tmp) < 0) {
             prev.rightChild = new TreeNode<Word>(tmp);
             totalWordCount++;
@@ -72,6 +82,8 @@ public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTabl
             distinctWordCount++;
             numComparisons++;
         }
+
+        numInsertions++;
     }
 
     // Returns count of searchKey
@@ -94,7 +106,13 @@ public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTabl
         writer.write("total_number_of_words: " + this.getTotalWordCount() + System.lineSeparator());
         writer.write("total_number_of_distinct_words: " + this.getDistinctWordCount() + System.lineSeparator());
 
+        writer.write(System.lineSeparator());
+
+        writer.write("number_of_comparisons: " + this.getNumOfComps() + System.lineSeparator());
+
         writer.write(inOrder());
+
+        writer.write(System.lineSeparator());
 
         writer.close();
     }
@@ -140,12 +158,18 @@ public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTabl
 
     private TreeNode<Word> findNode(TreeNode<Word> node, Word w) {
         // Base Cases: root is null or key is present at root
+        numComparisons++;
+
         if (node == null || node.getKey().compareTo(w) == 0)
             return node;
+
+        numComparisons++;
 
         // Key is greater than root's key
         if (node.getKey().compareTo(w) < 0)
             return findNode(node.rightChild, w);
+
+        numComparisons++;
 
         // Key is smaller than root's key
         return findNode(node.leftChild, w);

@@ -48,11 +48,14 @@ public class FTableArray implements ADTFrequencyTable {
             words.add(tmp);
             totalWordCount++;
             distinctWordCount++;
+            numComparisons++;
         } else {
             int tmpCount = words.get(contains).getCount();
             words.set(contains, new Word(tmp.getKey(), tmpCount + 1));
             totalWordCount++;
+            numComparisons++;
         }
+
         numInsertions++;
 
         Collections.sort(words);
@@ -81,7 +84,13 @@ public class FTableArray implements ADTFrequencyTable {
         FileWriter writer = new FileWriter(fileName);
         writer.write("total_number_of_words: " + this.getTotalWordCount() + System.lineSeparator());
         writer.write("total_number_of_distinct_words: " + this.getDistinctWordCount() + System.lineSeparator());
+
         writer.write(System.lineSeparator());
+
+        writer.write("number_of_comparisons: " + this.getNumOfComps() + System.lineSeparator());
+
+        writer.write(System.lineSeparator());
+
         for (Word w : this.getWords()) {
             writer.write(w.getKey().toUpperCase() + " " + w.getCount() + System.lineSeparator());
         }
