@@ -45,18 +45,15 @@ public class FTableArray implements ADTFrequencyTable {
         numComparisons++;
 
         if (contains < 0) {
-            //System.out.println("DEBUG: New");
             words.add(tmp);
             totalWordCount++;
             distinctWordCount++;
-            numInsertions++;
         } else {
-            System.out.println("DEBUG: Contains");
             int tmpCount = words.get(contains).getCount();
             words.set(contains, new Word(tmp.getKey(), tmpCount + 1));
             totalWordCount++;
-            numInsertions++;
         }
+        numInsertions++;
 
         Collections.sort(words);
 
