@@ -29,11 +29,11 @@ public class DriverProg {
         String input;
 
         // Prompt file
-        System.out.println("Enter the name of the input file:");
+        System.out.println("Enter the name of the input file: ");
         input = kbd.nextLine();
 
         // Read file
-        System.out.println("Reading...\n");
+        System.out.println("Reading from file...\n");
         try {
             file = new File(input);
             fileIn = new Scanner(file);
@@ -51,32 +51,48 @@ public class DriverProg {
         }
 
         // Print initial  table stats
-        System.out.println("Printing initial table stats.");
+        System.out.println("Writing initial table stats to file.");
         arrFT.saveFTable("outputArrayInitial.txt");
         //bstFT.saveFTable("outputBSTInitial.txt");
 
         // Operation loop
         while (!quit) {
-            System.out.println("Please type a number to choose an operation:\n\t1) Retrieve\t2) Insert\t3) Quit");
+            System.out.println("Please type a number to choose an operation:\n\t1) Retrieve\t\t2) Insert\t3) Quit");
             input = kbd.nextLine();
 
             switch(Integer.parseInt(input)) {
                 case 1:
                     // Retrieve
+                    System.out.println("Please enter a word to retrieve: ");
+                    input = kbd.nextLine();
+                    System.out.println(arrFT.retrieve(input));
+                    //System.out.println(bstFT.retrieve(input));
+                    //System.out.println("Count of " + input + ": " + arrFT.retrieve(input));
+                    break;
                 case 2:
                     // Insert
+                    System.out.println("Please enter a word to insert: ");
+                    input = kbd.nextLine();
+                    KeyedItem item = new KeyedItem(input);
+                    arrFT.insert(item);
+                    //System.out.println("Added " + input + " to FreqTable");
+                    //bstFT.insert(input);
+                    break;
                 case 3:
                     // Quit
+                    System.out.println("Quitting program...");
                     quit = true;
+                    break;
                 default:
-                    // Blah
+                    // Default
+                    break;
 
             } // End switch
 
         } // End while
 
         // Print modified table stats
-        System.out.println("Printing modified table stats.");
+        System.out.println("Writing modified table stats to file.");
         arrFT.saveFTable("outputArrayModified.txt");
         //bstFT.saveFTable("outputBSTModified.txt");
 

@@ -30,7 +30,18 @@ public class Word extends KeyedItem<String> implements Comparable<Word> {
          */
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return this.toString().equals(o.toString());
+    }
+
+    @Override
+    public String toString() {
+        return this.getKey().toUpperCase();
+    }
+
     public int getCount() {
         return this.count;
     }
+
 }

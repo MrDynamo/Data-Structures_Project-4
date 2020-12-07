@@ -17,4 +17,9 @@ public class KeyedItem<KT extends Comparable<? super KT>> {
         return this.searchKey.compareTo(searchKey);
     }
 
+    // Do i have to add toString() here?
+    @Override
+    public String toString() {
+        return searchKey.toString();
+    }
 }
