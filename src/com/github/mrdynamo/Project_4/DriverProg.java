@@ -67,7 +67,6 @@ public class DriverProg {
                     input = kbd.nextLine();
                     System.out.println("arrFT: " + arrFT.retrieve(input));
                     System.out.println("bstFT: " + bstFT.retrieve(input));
-                    //System.out.println("Count of " + input + ": " + arrFT.retrieve(input));
                     break;
                 case 2:
                     // Insert
@@ -76,7 +75,6 @@ public class DriverProg {
                     KeyedItem item = new KeyedItem(input);
                     arrFT.insert(item);
                     bstFT.insert(item);
-                    //System.out.println("Added " + input + " to FreqTable");
                     break;
                 case 3:
                     // Quit
