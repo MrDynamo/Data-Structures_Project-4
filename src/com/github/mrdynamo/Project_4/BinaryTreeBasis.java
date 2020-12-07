@@ -1,15 +1,15 @@
 package com.github.mrdynamo.Project_4;
 
-public abstract class BinaryTreeBasis<K, V> {
+public abstract class BinaryTreeBasis<K extends Comparable<? super K>> {
 
-    protected TreeNode<K, V> root;
+    protected TreeNode<K> root;
 
     public BinaryTreeBasis() {
         root = null;
     }
 
-    public BinaryTreeBasis(K key, V value) {
-        root = new TreeNode<K, V>(key, value, null, null);
+    public BinaryTreeBasis(K key) {
+        root = new TreeNode<K>(key, null, null);
     }
 
     public boolean isEmpty() {

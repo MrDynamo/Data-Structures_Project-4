@@ -1,9 +1,8 @@
 package com.github.mrdynamo.Project_4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class FTableArray implements ADTFrequencyTable {
 
@@ -11,7 +10,7 @@ public class FTableArray implements ADTFrequencyTable {
     private Word[] ftArray;
     private List<Word> words;
     private final int MAX_SIZE = 10000;
-    private int numOfComps;
+    private int numOfComps, totalWordCount, distinctWordCount;
 
     // Constructor
     public FTableArray() {
@@ -19,6 +18,8 @@ public class FTableArray implements ADTFrequencyTable {
         ftArray = new Word[MAX_SIZE];
         words = new ArrayList<Word>(MAX_SIZE);
         numOfComps = 0;
+        totalWordCount = 0;
+        distinctWordCount = 0;
     }
 
     // Implement
@@ -40,21 +41,40 @@ public class FTableArray implements ADTFrequencyTable {
         if (words.size() > MAX_SIZE)
             throw new FTableException("FTableException: Frequency table full!");
 
-        Word tmp = new Word(newItem.toString(), 1);
-        int tmpIndex = words.indexOf(tmp);
-        int tmpCount = words.get(tmpIndex).getCount();
-        if (words.contains(tmp))
-            words.set(tmpIndex, new Word(newItem.toString().toUpperCase(), tmpCount));
-        else
-            words.add(tmp);
+        int tmpIndex, tmpCount;
 
-        Collections.sort(words);
+        Word tmp = new Word(newItem.toString(), 1);
 
         /*
-        if (words.contains(words.stream().anyMatch(o -> o.getKey().equals(newItem.toString())))) {
-            words.set()
+        if (words.contains(tmp)) {
+            System.out.println("Contains");
+            tmpIndex = words.indexOf(tmp);
+            tmpCount = words.get(tmpIndex).getCount();
+            words.set(tmpIndex, new Word(newItem.toString().toUpperCase(), tmpCount));
+            totalWordCount++;
+        } else {
+            System.out.println("New");
+            words.add(tmp);
+            totalWordCount++;
+            distinctWordCount++;
         }
          */
+
+
+        if (contains(words, newItem.toString().toUpperCase())) {
+            System.out.println("Contains");
+            tmpIndex = words.indexOf(tmp);
+            tmpCount = words.get(tmpIndex).getCount();
+            words.set(tmpIndex, new Word(newItem.toString().toUpperCase(), tmpCount));
+            totalWordCount++;
+        } else {
+            System.out.println("New");
+            words.add(tmp);
+            totalWordCount++;
+            distinctWordCount++;
+        }
+
+        Collections.sort(words);
 
     }
 
@@ -66,14 +86,45 @@ public class FTableArray implements ADTFrequencyTable {
 
     // Implement
     @Override
-    public void saveFTable(String fileName) {
-
+    public void saveFTable(String fileName) throws IOException {
+        FileWriter writer = new FileWriter("outputArrayInitial.txt");
+        writer.write("total_number_of_words: " + this.getTotalWordCount() + System.lineSeparator());
+        writer.write("total_number_of_distinct_words: " + this.getDistinctWordCount() + System.lineSeparator());
+        for (Word w : this.getWords()) {
+            writer.write(w.getKey().toUpperCase() + " " + w.getCount() + System.lineSeparator());
+        }
+        writer.close();
     }
 
-    // Implement
+    // Return number of comparisons
     @Override
     public int getNumOfComps() {
         return numOfComps;
+    }
+
+    // Return words list
+    public List<Word> getWords() {
+        return this.words;
+    }
+
+    // Return total word count
+    public int getTotalWordCount() {
+        return this.totalWordCount;
+    }
+
+    // Return distinct word count
+    public int getDistinctWordCount() {
+        return this.distinctWordCount;
+    }
+    
+    public boolean contains(List<Word> list, String key) {
+        return list.stream().filter(o -> o.getKey().toUpperCase().equals(key.toUpperCase())).findFirst().isPresent();
+    }
+
+    public void perform(List<Word> list, String key) {
+        list.stream().filter(o -> o.getKey().toUpperCase().equals(key.toUpperCase())).forEach(o -> {
+
+        });
     }
 
 } // End FTableArray

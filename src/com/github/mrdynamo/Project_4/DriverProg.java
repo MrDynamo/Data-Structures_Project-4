@@ -2,20 +2,22 @@ package com.github.mrdynamo.Project_4;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DriverProg {
 
     /** Main Method **/
     // Test both implementations
-    public static void main(String[] args) throws FTableException {
+    public static void main(String[] args) throws FTableException, IOException {
 
         // Quit boolean
         boolean quit = false;
         int wordCount = 0;
 
         // Frequency tables
-        ADTFrequencyTable arrFT = new FTableArray();
+        FTableArray arrFT = new FTableArray();
         ADTFrequencyTable bstFT = new FTableBST();
 
         // File
@@ -45,16 +47,17 @@ public class DriverProg {
         while (fileIn.hasNext()) {
             KeyedItem item = new KeyedItem(fileIn.next());
             arrFT.insert(item);
-
-            // Add BST insert
+            //bstFT.insert(item);
         }
 
-        // Print initial table stats
-
+        // Print initial  table stats
+        System.out.println("Printing initial table stats.");
+        arrFT.saveFTable("outputArrayInitial.txt");
+        //bstFT.saveFTable("outputBSTInitial.txt");
 
         // Operation loop
         while (!quit) {
-            System.out.println("Please type a number to choose an operation:\n\t1) Retrieve\t2)Insert\t3)Quit");
+            System.out.println("Please type a number to choose an operation:\n\t1) Retrieve\t2) Insert\t3) Quit");
             input = kbd.nextLine();
 
             switch(Integer.parseInt(input)) {
@@ -73,6 +76,9 @@ public class DriverProg {
         } // End while
 
         // Print modified table stats
+        System.out.println("Printing modified table stats.");
+        arrFT.saveFTable("outputArrayModified.txt");
+        //bstFT.saveFTable("outputBSTModified.txt");
 
     } // End main
 

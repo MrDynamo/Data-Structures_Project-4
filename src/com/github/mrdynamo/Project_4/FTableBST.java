@@ -1,8 +1,11 @@
 package com.github.mrdynamo.Project_4;
 
-public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFrequencyTable {
+import java.io.FileWriter;
+import java.io.IOException;
 
-    private TreeNode<Word, Integer> root;
+public class FTableBST extends BinaryTreeBasis<Word> implements ADTFrequencyTable {
+
+    private TreeNode<Word> root;
     private int numOfComps;
 
     // Constructor
@@ -26,8 +29,10 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
     // Implement
     @Override
     public void insert(KeyedItem newItem) throws FTableException {
-        TreeNode<Word, Integer> r = root, prev = null;
-        Word tmp = new Word(newItem.toString(), 1);
+        TreeNode<Word> r = root, prev = null, tmpNode = null;
+        Word tmp = new Word(newItem.toString().toUpperCase(), 1);
+        tmpNode = new TreeNode<Word>(tmp);
+
         while (r != null) {
             prev = r;
             if (r.key.compareTo(tmp) < 0)
@@ -37,11 +42,11 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
         }
 
         if (root == null)
-            root = new TreeNode<Word, Integer>(newItem, 1);
-        else if (prev.key.compareTo(newItem) < 0)
-            prev.rightChild = new TreeNode<Word, Integer>(newItem, 1);
+            root = new TreeNode<Word>(tmp);
+        else if (prev.key.compareTo(tmp) < 0)
+            prev.rightChild = new TreeNode<Word>(tmp);
         else
-            prev.leftChild = new TreeNode<Word, Integer>(newItem, 1);
+            prev.leftChild = new TreeNode<Word>(tmp);
     }
 
     // Implement
@@ -52,8 +57,17 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
 
     // Implement
     @Override
-    public void saveFTable(String fileName) {
+    public void saveFTable(String fileName) throws IOException {
+        /*
+        FileWriter writer = new FileWriter(fileName);
+        writer.write("total_number_of_words: " + this.getTotalWordCount() + System.lineSeparator());
+        writer.write("total_number_of_distinct_words: " + this.getDistinctWordCount() + System.lineSeparator());
+        for (Word w : this.getWords()) {
+            writer.write(w.getKey().toUpperCase() + " " + w.getCount() + System.lineSeparator());
+        }
+        writer.close();
 
+         */
     }
 
     // Implement
@@ -63,7 +77,7 @@ public class FTableBST extends BinaryTreeBasis<String, Integer> implements ADTFr
     }
 
     @Override
-    public void setRootItem(String key) {
+    public void setRootItem(Word key) {
 
     }
 

@@ -1,5 +1,7 @@
 package com.github.mrdynamo.Project_4;
 
+import java.io.IOException;
+
 public interface ADTFrequencyTable {
 
     int size();
@@ -29,11 +31,11 @@ public interface ADTFrequencyTable {
     // Postcondition:
     // Throws:
 
-    void saveFTable(String filename);
+    void saveFTable(String filename) throws IOException;
     // Saves the words and their frequencies in the table in the output file filename in the ascending order based on the searchKey.
     // Precondition:
     // Postcondition:
-    // Throws:
+    // Throws: IOException writing the file
 
     int getNumOfComps();
     // Returns the number of key comparisons required to perform a particular frequency table operation.

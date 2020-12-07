@@ -5,6 +5,11 @@ public class Word extends KeyedItem<String> implements Comparable<Word> {
     //private String key;
     private int count;
 
+    public Word(String key) {
+        super(key.toUpperCase());
+        this.count = 0;
+    }
+
     public Word(String key, Integer count) {
         super(key.toUpperCase());
         //this.key = key;
