@@ -2,7 +2,6 @@ package com.github.mrdynamo.Project_4;
 
 public class Word extends KeyedItem<String> implements Comparable<Word> {
 
-    //private String key;
     private int count;
 
     public Word(String key) {
@@ -12,7 +11,6 @@ public class Word extends KeyedItem<String> implements Comparable<Word> {
 
     public Word(String key, Integer count) {
         super(key.toUpperCase());
-        //this.key = key;
         this.count = count;
     }
 
